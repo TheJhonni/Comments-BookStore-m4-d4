@@ -16,9 +16,6 @@ class SingleBook extends Component {
             src={this.props.book.img}
             onClick={() => {
               this.setState({ selected: !this.state.selected });
-              this.setState({
-                comments: !this.state.comments.length !== 0,
-              });
             }}
             style={{
               border: this.state.selected ? "3px solid red" : "none",

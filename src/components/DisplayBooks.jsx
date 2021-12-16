@@ -38,8 +38,8 @@ class DisplayBooks extends Component {
                 book.title.toLowerCase().includes(this.state.searchQuery)
               )
               .map((book) => (
-                <Col>
-                  <SingleBook key={book._id} book={book} />
+                <Col key={book.asin}>
+                  <SingleBook book={book} />
                 </Col>
               ))}
           </Row>
