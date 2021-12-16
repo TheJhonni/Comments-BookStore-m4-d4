@@ -1,8 +1,8 @@
 import { Component } from "react";
 import SingleBook from "./SingleBook";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import Form from "react-bootstrap/Form";
+import Comments from "./Comments";
+import CommentItems from "./CommentItems";
+import { Col, Row, Form } from "react-bootstrap";
 import { Container } from "react-bootstrap";
 
 class DisplayBooks extends Component {
@@ -40,8 +40,8 @@ class DisplayBooks extends Component {
                 book.title.toLowerCase().includes(this.state.searchQuery)
               )
               .map((book) => (
-                <Col key={book._id}>
-                  <SingleBook book={book} />
+                <Col>
+                  <SingleBook key={book._id} book={book} />
                 </Col>
               ))}
           </Row>
