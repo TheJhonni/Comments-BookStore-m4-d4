@@ -13,8 +13,7 @@ class CommentItems extends Component {
   fetchComments = async () => {
     try {
       let response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/comments/" +
-          Comment.comment._id,
+        "https://striveschool-api.herokuapp.com/api/comments/",
         {
           method: "POST",
           body: JSON.stringify(this.state.Comments),
@@ -27,6 +26,8 @@ class CommentItems extends Component {
       );
       if (response.ok) {
         let data = await response.json();
+
+        console.log(data);
 
         this.setState({
           Comments: [],
@@ -47,10 +48,11 @@ class CommentItems extends Component {
         isError: true,
       });
     }
-
-    componentDidMount = async () => {
-      this.fetchComments();
-    };
+  };
+  componentDidMount = async () => {
+    this.fetchComments();
+  };
+  render() {
     return (
       <>
         <h6>Comments</h6>
@@ -68,7 +70,7 @@ class CommentItems extends Component {
         </ListGroup>
       </>
     );
-  };
+  }
 }
 
 export default CommentItems;

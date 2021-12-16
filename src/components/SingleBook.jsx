@@ -11,8 +11,7 @@ class SingleBook extends Component {
 
   componentDidMount = async () => {
     const resp = await fetch(
-      "https://striveschool-api.herokuapp.com/api/comments/" +
-        this.props.book.asin,
+      "https://striveschool-api.herokuapp.com/api/comments/",
       {
         headers: {
           Authorization:
@@ -38,6 +37,9 @@ class SingleBook extends Component {
                 src={this.props.book.img}
                 onClick={() => {
                   this.setState({ selected: !this.state.selected });
+                  this.setState({
+                    comments: !this.state.comments.length !== 0,
+                  });
                 }}
                 style={{
                   border: this.state.selected ? "3px solid red" : "none",
@@ -46,7 +48,11 @@ class SingleBook extends Component {
               <Card.Body>
                 <Card.Title>{this.props.book.category}</Card.Title>
                 <Card.Text>{this.props.book.title}</Card.Text>
-                <Comments comments={this.state.comments} />
+                {this.state.comments ? (
+                  <Comments comments={this.state.comments} />
+                ) : (
+                  <Comments comments={""} />
+                )}
               </Card.Body>
             </Card>
           }

@@ -1,7 +1,7 @@
-import { Component } from "react";
-import SingleBook from "./SingleBook";
 import Comments from "./Comments";
 import CommentItems from "./CommentItems";
+import SingleBook from "./SingleBook";
+import { Component } from "react";
 import { Col, Row, Form } from "react-bootstrap";
 import { Container } from "react-bootstrap";
 
