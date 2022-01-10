@@ -1,9 +1,9 @@
 import { ListGroup, Button } from "react-bootstrap";
 
-const deleteComment = async () => {
+const deleteComment = async (asin) => {
   try {
     let response = await fetch(
-      "https://striveschool-api.herokuapp.com/api/comments" + this.props.asin,
+      "https://striveschool-api.herokuapp.com/api/comments" + asin,
       {
         headers: {
           Authorization:
@@ -29,7 +29,7 @@ const SingleComment = (props) => (
     <Button
       variant="warning"
       className="ml-1"
-      onClick={() => deleteComment(this.comment.asin)}
+      onClick={() => deleteComment(this.comment._id)}
     >
       X
     </Button>

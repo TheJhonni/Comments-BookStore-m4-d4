@@ -5,10 +5,20 @@ export default class AddComment extends Component {
   state = {
     comment: {
       comment: "",
+      elementId: null,
       rate: 1,
-      elementId: this.props.asin,
     },
   };
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.asin !== this.props.asin)
+      this.setState({
+        comment: {
+          ...this.state.comment,
+          elementId: this.props.asin,
+        },
+      });
+  }
 
   sendComment = async (e) => {
     e.preventDefault();
@@ -43,11 +53,7 @@ export default class AddComment extends Component {
               type="text"
               placeholder="add your comment"
               value={this.state.comment.comment}
-              onChange={(e) =>
-                this.setState({
-                  comment: { ...this.state.comment, comment: e.target.value },
-                })
-              }
+              onChange={(e) => this.setState({ comment: e.target.value })}
             />
           </Form.Group>
           <Form.Group controlId="exampleForm.ControlSelect1">
@@ -55,11 +61,7 @@ export default class AddComment extends Component {
             <Form.Control
               as="select"
               value={this.state.comment.rate}
-              onChange={(e) =>
-                this.setState({
-                  comment: { ...this.state.comment, rate: e.target.value },
-                })
-              }
+              onChange={(e) => this.setState({ rate: e.target.value })}
             >
               <option>1</option>
               <option>2</option>
