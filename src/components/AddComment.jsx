@@ -24,7 +24,7 @@ export default class AddComment extends Component {
     e.preventDefault();
     try {
       let Response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/comments/",
+        "https://striveschool-api.herokuapp.com/api/comments",
         {
           method: "POST",
           body: JSON.stringify(this.state.comment),
@@ -36,6 +36,8 @@ export default class AddComment extends Component {
       );
       if (Response.ok) {
         alert("You just send a new comment! BRAVO!");
+      } else {
+        alert("Not sent...careful go easy PLZ");
       }
     } catch (error) {
       console.log(error);

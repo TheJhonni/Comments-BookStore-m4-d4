@@ -19,7 +19,6 @@ function App() {
       <MyBadge str="MyBadge is here" color="danger" />
       <SingleBook book={fantasy[0]} />
       <DisplayBooks books={fantasy} />
-
       <MyFooter />
     </div>
   );
