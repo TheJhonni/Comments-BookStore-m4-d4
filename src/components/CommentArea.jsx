@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import CommentList from "./CommentList";
 import AddComment from "./AddComment";
 
@@ -7,7 +7,13 @@ class CommentArea extends Component {
     comments: [],
   };
 
-  componentDidMount = async () => {
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.comments !== prevProps.comments) {
+      this.fetchComments();
+    }
+  }
+
+  fetchComments = async () => {
     try {
       let Response = await fetch(
         "https://striveschool-api.herokuapp.com/api/comments/" +
@@ -15,8 +21,7 @@ class CommentArea extends Component {
         {
           headers: {
             Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWIwYjBlYzRjZmY1ZjAwMTU5MGJkYjUiLCJpYXQiOjE2Mzk2NjE4NzYsImV4cCI6MTY0MDg3MTQ3Nn0.cTbI09BbJ6cZrlPjXkDnCLpr941GJOmT4ZT-u_mWPFs",
-            "Content-Type": "application/json",
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWIwYjBlYzRjZmY1ZjAwMTU5MGJkYjUiLCJpYXQiOjE2NDE4MjcxNjEsImV4cCI6MTY0MzAzNjc2MX0.8VgXxwRxux35U5ehRsU9y1MXouealZDxFaoazJYlp1k",
           },
         }
       );
