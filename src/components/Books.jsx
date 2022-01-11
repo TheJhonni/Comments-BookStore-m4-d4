@@ -1,37 +1,31 @@
-import { Component } from "react";
-import { Row, Col, Form, Container } from "react-bootstrap";
+import { useState } from "react";
+import { Form } from "react-bootstrap";
 import SingleBook from "./SingleBook";
 
-class Books extends Component {
-  state = {
-    searchQuery: "",
-  };
+const Books = ({ books }) => {
+  const [searchQuery, setSearchQuery] = useState("");
 
-  render() {
-    return (
-      <>
-        <Form>
-          <Form.Group className="mb-3">
-            <Form.Label>Search</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Search for Books"
-              value={this.state.searchQuery}
-              onChange={(e) => this.setState({ searchQuery: e.target.value })}
-            ></Form.Control>
-          </Form.Group>
-        </Form>
+  return (
+    <>
+      <Form>
+        <Form.Group className="mb-3">
+          <Form.Label>Search</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Search for Books"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+      </Form>
 
-        {this.props.books
-          .filter((book) =>
-            book.title.toLowerCase().includes(this.state.searchQuery)
-          )
-          .map((book, i) => (
-            <SingleBook oneBook={book} key={i} />
-          ))}
-      </>
-    );
-  }
-}
+      {books
+        .filter((book) => book.title.toLowerCase().includes(searchQuery))
+        .map((book, i) => (
+          <SingleBook oneBook={book} key={i} />
+        ))}
+    </>
+  );
+};
 
 export default Books;

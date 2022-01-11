@@ -1,82 +1,74 @@
-import React, { Component } from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 
-export default class AddComment extends Component {
-  state = {
-    comment: {
-      comment: "",
-      elementId: null,
-      rate: 1,
-    },
-  };
+const AddComment = (e) => {
+  const [comment, setComment] = useState("");
+  const [elementId, setElementId] = useState(null);
+  const [rate, setRate] = useState(1);
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.asin !== this.props.asin)
-      this.setState({
-        comment: {
-          ...this.state.comment,
-          elementId: this.props.asin,
-        },
-      });
-  }
+  useEffect(() => {
+    setElementId(elementId);
+  });
 
-  sendComment = async (e) => {
-    e.preventDefault();
-    try {
-      let Response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/comments",
-        {
-          method: "POST",
-          body: JSON.stringify(this.state.comment),
-          headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWIwYjBlYzRjZmY1ZjAwMTU5MGJkYjUiLCJpYXQiOjE2NDE4MjcxNjEsImV4cCI6MTY0MzAzNjc2MX0.8VgXxwRxux35U5ehRsU9y1MXouealZDxFaoazJYlp1k",
-          },
-        }
-      );
-      if (Response.ok) {
-        alert("You just send a new comment! BRAVO!");
-      } else {
-        alert("Not sent...careful go easy PLZ");
+  useEffect(() => {
+    const sendComment = async () => {
+      try {
+        let Response = await fetch(
+          "https://striveschool-api.herokuapp.com/api/comments",
+          {
+            method: "POST",
+            body: JSON.stringify(comment),
+            headers: {
+              Authorization:
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWIwYjBlYzRjZmY1ZjAwMTU5MGJkYjUiLCJpYXQiOjE2NDE4MjcxNjEsImV4cCI6MTY0MzAzNjc2MX0.8VgXxwRxux35U5ehRsU9y1MXouealZDxFaoazJYlp1k",
+            },
+          }
+        );
+        let newComment = await Response.json();
+
+        setComment(newComment);
+      } catch (error) {
+        console.log(error);
+        alert("Naaah you made a mistake! Comment not sent");
       }
-    } catch (error) {
-      console.log(error);
-      alert("Naaah you made a mistake! Comment not sent");
-    }
-  };
+    };
 
-  render() {
-    return (
-      <div>
-        <Form onSubmit={this.sendComment}>
-          <Form.Group controlId="exampleForm.ControlInput1">
-            <Form.Label>Comment Text</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="add your comment"
-              value={this.state.comment.comment}
-              onChange={(e) => this.setState({ comment: e.target.value })}
-            />
-          </Form.Group>
-          <Form.Group controlId="exampleForm.ControlSelect1">
-            <Form.Label>Example select</Form.Label>
-            <Form.Control
-              as="select"
-              value={this.state.comment.rate}
-              onChange={(e) => this.setState({ rate: e.target.value })}
-            >
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </Form.Control>
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-        </Form>
-      </div>
-    );
-  }
-}
+    sendComment();
+  }, []);
+
+  return (
+    <div>
+      <Form onSubmit={AddComment}>
+        <Form.Group controlId="exampleForm.ControlInput1">
+          <Form.Label>Comment Text</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="add your comment"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group controlId="exampleForm.ControlSelect1">
+          <Form.Label>Example select</Form.Label>
+          <Form.Control
+            as="select"
+            value={rate}
+            onChange={(e) => setRate(e.target.value)}
+          >
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </Form.Control>
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+      </Form>
+    </div>
+  );
+};
+
+export default AddComment;
