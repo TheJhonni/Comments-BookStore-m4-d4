@@ -5,8 +5,8 @@ const SingleBook = ({ book }) => {
   const [selectedBook, setSelectedBook] = useState(null);
 
   return (
-    <>
-      <Card className="px-1 mx-1" style={{ width: "12rem" }}>
+    <div className="d-flex flex-row justify-content-between align-items-center">
+      <Card className="card px-1 mx-3" style={{ width: "12rem" }}>
         <Card.Img
           variant="top"
           src={book.img}
@@ -14,7 +14,10 @@ const SingleBook = ({ book }) => {
             setSelectedBook(book.asin);
           }}
           style={{
-            border: selectedBook === book.asin ? "3px solid red" : "none",
+            border:
+              selectedBook === book.asin
+                ? "3px solid rgb(86, 187, 153)"
+                : "none",
           }}
         />
         <Card.Body>
@@ -22,7 +25,7 @@ const SingleBook = ({ book }) => {
           <Card.Text>{book.title}</Card.Text>
         </Card.Body>
       </Card>
-    </>
+    </div>
   );
 };
 

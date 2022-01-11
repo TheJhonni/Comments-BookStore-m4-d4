@@ -25,8 +25,6 @@ const CommentArea = ({ asin }) => {
       if (response.ok) {
         let comments = await response.json();
 
-        console.log(comments);
-
         setComment(comments);
         setisError(false);
         setisLoading(false);
@@ -49,7 +47,7 @@ const CommentArea = ({ asin }) => {
   }, [asin]);
 
   return (
-    <div>
+    <div className="rounded">
       {comment && (
         <>
           <AddComment asin={asin} />

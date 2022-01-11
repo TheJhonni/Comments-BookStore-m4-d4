@@ -40,6 +40,7 @@ const DisplayBooks = ({ books }) => {
                 .map((book) => (
                   <Col xs={3} key={book.asin}>
                     <span
+                      className="mx-2"
                       onClick={() => {
                         setSelectedBook(book.asin);
                       }}

@@ -16,7 +16,7 @@ function App() {
         links={["Book Genres", "Stores", "About us"]}
       />
       <WarningSign text="What are Props again?" />
-      <MyBadge str="MyBadge is here" color="danger" />
+      <MyBadge str="MyBadge is here" color="primary" />
       <SingleBook book={fantasy[0]} />
       <DisplayBooks books={fantasy} />
       <MyFooter />
