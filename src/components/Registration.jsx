@@ -20,12 +20,6 @@ const renderError = (errorMessage) => (
 
 const renderErrors = (errors) => errors.map((error) => renderError(error));
 
-const errors = [
-  "Must be at least 8 chars long",
-  "Must have at least 1 digit",
-  "Must have at least 1 letter",
-];
-
 function Registration() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -37,7 +31,7 @@ function Registration() {
 
   return (
     <Form
-      onSubmit={handleSubmit}
+      /* onSubmit={handleSubmit} */
       className="d-flex flex-column justify-content-center items-align-center my-5 mx-3 px-2"
     >
       <Form.Group className="mx-5 my-1 px-2" controlId="formName">
@@ -104,6 +98,7 @@ function Registration() {
       </Form.Group>
 
       <Button
+        disabled={confirmPassword === password}
         className="d-flex justify-content-center mx-5 my-3"
         variant="primary"
         type="submit"
