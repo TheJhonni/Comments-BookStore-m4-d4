@@ -1,4 +1,6 @@
 import { Navbar, Nav } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import Registration from "./Registration";
 
 const MyNavbar = (props) => {
   return (
@@ -12,6 +14,9 @@ const MyNavbar = (props) => {
               {link.slice(0, 1).toUpperCase() + link.slice(1)}
             </Nav.Link>
           ))}
+          <Link to="/registration">
+            <div className="nav-link ml-5">Register</div>
+          </Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
