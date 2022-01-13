@@ -1,5 +1,4 @@
 import React from "react";
-import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
@@ -8,7 +7,11 @@ export default function Registration() {
   const validationSchema = Yup.object().shape({
     password: Yup.string()
       .required("Password is required")
-      .min(6, "Password must be at least 6 characters"),
+      .min(8, "Password must be at least 8 characters")
+      .matches(
+        "^(^(?=.*[A-Za-z])(?=.*d)[A-Za-zd]{8,}$)",
+        "Must Contain 8 Characters, One Number and one digit"
+      ),
     confirmPassword: Yup.string()
       .required("Confirm Password is required")
       .oneOf([Yup.ref("password")], "Passwords must match"),
