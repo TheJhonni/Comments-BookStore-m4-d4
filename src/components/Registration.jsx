@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
-import { emailValidator } from "../validators";
-
-const renderErrors = (errors) => errors.map((error) => renderError(error));
+import { emailValidator, passwordValidator } from "../validators";
 
 const renderError = (errorMessage) => (
   <div className="d-flex justify-content-start align-items-center m-2">
@@ -20,6 +18,8 @@ const renderError = (errorMessage) => (
   </div>
 );
 
+const renderErrors = (errors) => errors.map((error) => renderError(error));
+
 const errors = [
   "Must be at least 8 chars long",
   "Must have at least 1 digit",
@@ -32,10 +32,14 @@ function Registration() {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const isEmailValid = emailValidator.validate(email);
-  const isPasswordValid = false;
+  const passwordErrors = passwordValidator.validate(password);
+  const isPasswordValid = passwordErrors.lenght === 0;
 
   return (
-    <Form className="d-flex flex-column justify-content-center items-align-center my-5 mx-3 px-2">
+    <Form
+      onSubmit={handleSubmit}
+      className="d-flex flex-column justify-content-center items-align-center my-5 mx-3 px-2"
+    >
       <Form.Group className="mx-5 my-1 px-2" controlId="formName">
         <Form.Label>Name</Form.Label>
         <Form.Control
@@ -79,8 +83,9 @@ function Registration() {
           placeholder="Password"
           autoComplete="off"
           required
+          pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
         />
-        {!isPasswordValid ? renderErrors(errors) : null}
+        {!isPasswordValid ? renderErrors(passwordErrors) : null}
       </Form.Group>
 
       <Form.Group

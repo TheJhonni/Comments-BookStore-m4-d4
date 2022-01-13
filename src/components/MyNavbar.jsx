@@ -1,6 +1,5 @@
 import { Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Registration from "./Registration";
 
 const MyNavbar = (props) => {
   return (
@@ -15,7 +14,7 @@ const MyNavbar = (props) => {
             </Nav.Link>
           ))}
           <Link to="/registration">
-            <div className="nav-link ml-5">Register</div>
+            <div className="nav-link ml-sm-auto ml-md-5">Register</div>
           </Link>
         </Nav>
       </Navbar.Collapse>
