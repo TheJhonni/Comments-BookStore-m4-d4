@@ -15,7 +15,7 @@ const SingleBook = ({ book }) => {
           }}
           style={{
             border:
-              selectedBook === book.asin
+              !selectedBook === book.asin
                 ? "3px solid rgb(86, 187, 153)"
                 : "none",
           }}
